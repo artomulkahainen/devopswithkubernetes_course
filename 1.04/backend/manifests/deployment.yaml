@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logoutput
+  name: todos
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: logoutput
+      app: todos
   template:
     metadata:
       labels:
-        app: logoutput
+        app: todos
     spec:
       containers:
-        - name: logoutput
-          image: artomulkahainen/log_output:4e5460d2444e
+        - name: todos
+          image: artomulkahainen/project_v0.2:1
