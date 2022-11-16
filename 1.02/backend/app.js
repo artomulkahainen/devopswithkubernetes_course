@@ -44,5 +44,5 @@ app.delete("/todos/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Project v0.1 listening on port ${port}`);
+  console.log(`Server started on port ${port}`);
 });
