@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: artomulkahainen/log_output:latest
+          image: artomulkahainen/logoutput:1
