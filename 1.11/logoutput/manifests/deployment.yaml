@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logoutput
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logoutput
+  template:
+    metadata:
+      labels:
+        app: logoutput
+    spec:
+      volumes:
+        - name: shared-logoutput-pingpong
+          persistentVolumeClaim:
+            claimName: logoutput-pingpong-claim
+      containers:
+        - name: logoutput
+          image: artomulkahainen/logoutput:1
+          volumeMounts:
+            - name: shared-logoutput-pingpong
+              mountPath: /usr/app
