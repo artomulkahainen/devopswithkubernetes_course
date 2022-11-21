@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import fs from "fs";
+import { readFile, writeFile } from "fs/promises";
 
 const app = express();
 const port = 3002;
@@ -8,38 +9,43 @@ const port = 3002;
 app.use(express.json());
 app.use(cors());
 
-const dir = "/usr/app";
+const dir = "/tmp/logs";
 
-app.get("/pingpong", (req, res) => {
-  let number;
-
-  fs.readFile(`${dir}/pingpong.log`, "utf8", function (err, data) {
-    // Display the file content
-    number = Number(data);
+const getFile = async () =>
+  new Promise((res) => {
+    fs.readFile(dir + "/pingpong.log", (err, buffer) => {
+      if (err)
+        return console.log("FAILED TO READ FILE", "----------------", err);
+      res(buffer);
+    });
   });
 
-  res.send(`pong ${number}`);
+app.get("/pingpong", async (req, res) => {
+  let number = await getFile();
   number++;
 
-  fs.writeFile(`${dir}/pingpong.log`, number.toString(), (err) => {
+  number = number.toString();
+  console.log(number);
+
+  await writeFile(`${dir}/pingpong.log`, number, (err) => {
     if (err) {
       console.error(err);
     } else {
       console.log("file written successfully");
     }
   });
+
+  res.send(`pong ${number}`);
 });
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 
-if (!fs.existsSync(dir)) {
-  await fs.promises.mkdir(dir, { recursive: true });
-
+if (!fs.existsSync(`${dir}/pingpong.log`)) {
   const content = "0";
 
-  fs.writeFile(`${dir}/pingpong.log`, content, (err) => {
+  await writeFile(`${dir}/pingpong.log`, content, (err) => {
     if (err) {
       console.error(err);
     } else {

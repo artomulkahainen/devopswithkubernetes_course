@@ -18,7 +18,7 @@ spec:
             claimName: logoutput-pingpong-claim
       containers:
         - name: logoutput
-          image: artomulkahainen/logoutput:1
+          image: artomulkahainen/logoutput:5
           volumeMounts:
             - name: shared-logoutput-pingpong
-              mountPath: /usr/app
+              mountPath: /tmp/logs

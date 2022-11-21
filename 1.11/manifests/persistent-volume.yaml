@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   local:
-    path: /usr/app
+    path: /tmp/logs
   nodeAffinity:
     required:
       nodeSelectorTerms:

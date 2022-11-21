@@ -8,6 +8,17 @@ const port = 3001;
 
 const randomUuid = uuidv4();
 
+const dir = "/tmp/logs";
+
+const getFile = async () =>
+  new Promise((res) => {
+    fs.readFile(dir + "/pingpong.log", (err, buffer) => {
+      if (err)
+        return console.log("FAILED TO READ FILE", "----------------", err);
+      res(buffer);
+    });
+  });
+
 const generateUuid = () => {
   console.log(`${new Date()}:`, randomUuid);
 
@@ -19,12 +30,8 @@ const generateUuid = () => {
 app.use(express.json());
 app.use(cors());
 
-app.get("/status", (req, res) => {
-  let number;
-  fs.readFile(`${dir}/pingpong.log`, "utf8", function (err, data) {
-    // Display the file content
-    number = Number(data);
-  });
+app.get("/status", async (req, res) => {
+  const number = await getFile();
   res.send(`${new Date()}: ${randomUuid}\nPing / Pongs: ${number}`);
 });
 
