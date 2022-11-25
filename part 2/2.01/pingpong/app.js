@@ -10,7 +10,7 @@ app.use(cors());
 let pingpongCount = 0;
 
 app.get("/pingpong", async (req, res) => {
-  res.send(pingpongCount);
+  res.json({ count: pingpongCount });
   pingpongCount++;
 });
 

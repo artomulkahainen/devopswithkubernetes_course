@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: artomulkahainen/pingpong:16
+          image: artomulkahainen/pingpong:17

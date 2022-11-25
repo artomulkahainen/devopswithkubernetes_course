@@ -20,8 +20,12 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/status", async (req, res) => {
-  const pingpongCount = await fetch("http://pingpong-service:3002");
-  res.send(`${new Date()}: ${randomUuid}\nPing / Pongs: ${pingpongCount}`);
+  const pingpongCount = await (
+    await fetch("http://pingpong-service:3002/pingpong")
+  ).json();
+  res.send(
+    `${new Date()}: ${randomUuid}\nPing / Pongs: ${pingpongCount.count}`
+  );
 });
 
 app.listen(port, () => {
