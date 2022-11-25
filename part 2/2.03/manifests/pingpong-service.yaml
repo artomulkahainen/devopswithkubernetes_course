@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: devopscourse
+  name: pingpong-service
+spec:
+  type: ClusterIP
+  selector:
+    app: pingpong
+  ports:
+    - port: 3002
+      protocol: TCP
+      targetPort: 3002
