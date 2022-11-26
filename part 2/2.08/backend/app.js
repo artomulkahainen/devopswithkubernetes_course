@@ -8,8 +8,6 @@ const { Todo } = require("./models/Todo.js");
 const app = express();
 const port = process.env.PORT;
 
-let todos = [];
-
 app.use(express.json());
 app.use(cors());
 
@@ -65,9 +63,9 @@ app.delete(apiPrefix + "/todos/:id", async (req, res) => {
   }
 });
 
+findAFile();
+initDb();
+
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
-
-findAFile();
-initDb();
