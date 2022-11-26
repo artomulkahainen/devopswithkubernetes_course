@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: devopscourse
+  name: pingpong-configmap
+data:
+  POSTGRES_DB: pingpong
+  POSTGRES_USER: postgres
+  POSTGRES_HOST: postgres-service.devopscourse
+  POSTGRES_PORT: 5432
