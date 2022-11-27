@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: devopscourse
+  name: wikipedia-fetcher
+spec:
+  # this is using UTC timezone = two hours behind from finnish time
+  schedule: "48 07 * * *"
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: wikipedia-fetcher
+              image: artomulkahainen/wikipedia-fetcher:1
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: BACKEND_HOST
+                  value: "todo-backend-service.devopscourse"
+                - name: BACKEND_PORT
+                  value: "3001"
+          restartPolicy: OnFailure
