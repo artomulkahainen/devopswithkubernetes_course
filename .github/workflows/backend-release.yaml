@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: console.log
-        run: echo ${{ secrets.TESTI }}
+      - name: Install wget
+        run: apt-get install wget
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up Cloud SDK
@@ -42,6 +42,10 @@ jobs:
       #- name: Publish frontend
       #  run: |-
       #    docker push "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-FRONTEND-$GITHUB_SHA"
+      - name: Download sops
+        run: wget https://github.com/mozilla/sops/releases/download/v3.7.3/sops_3.7.3_amd64.deb
+      - name: Install sops
+        run: dpkg -i ./sops_3.7.3_amd64.deb
       - name: Apply postgres secret
         run: sops --decrypt ./manifests/postgres-pw-secret.enc.yaml | kubectl apply -f -
 
