@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: devopscourse
   name: postgres-ss
 spec:
   serviceName: postgres
