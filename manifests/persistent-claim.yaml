@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: todo-claim
 spec:
-  storageClassName: regionalStorage
+  storageClassName: pd-standard
   accessModes:
     - ReadWriteOnce
   resources:
