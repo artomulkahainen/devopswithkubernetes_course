@@ -34,7 +34,7 @@ jobs:
           -t "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-BACKEND-$GITHUB_SHA" .
       #- name: Build frontend
       #  run: |-
-      #    docker build --file ./frontend/Dockerfile  \
+      #    docker build \
       #    -t "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-FRONTEND-$GITHUB_SHA" .
       - name: Publish backend
         run: |-
@@ -56,7 +56,7 @@ jobs:
       - name: Deploy backend
         run: |-
           kustomize edit set image gcr.io/PROJECT_ID/IMAGE-BACKEND=gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-BACKEND-$GITHUB_SHA
-          kustomize build ./kustomization-backend.yaml | kubectl apply -f -
+          kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $IMAGE
           kubectl get services -o wide
 
