@@ -4,11 +4,11 @@ on:
   push:
 
 env:
-  PROJECT_ID: ${{ env.GKE_PROJECT }}
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
   IMAGE: dwk-env
-  SOPS_AGE_KEY: ${{ env.GKE_SOPS_KEY }}
+  SOPS_AGE_KEY: ${{ secrets.GKE_SOPS_KEY }}
 
 jobs:
   build-publish-deploy-backend:
@@ -16,13 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: console.log
+        run: echo ${{ secrets.TESTI}}
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
-          project_id: ${{ env.GKE_PROJECT }}
-          service_account_key: ${{ env.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
           export_default_credentials: true
       - run: gcloud --quiet auth configure-docker
       - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
