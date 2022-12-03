@@ -31,14 +31,14 @@ jobs:
       - name: Build backend
         run: |-
           docker build \
-          -t "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-BACKEND-$GITHUB_SHA" .
+          -t "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" .
       #- name: Build frontend
       #  run: |-
       #    docker build \
       #    -t "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-FRONTEND-$GITHUB_SHA" .
       - name: Publish backend
         run: |-
-          docker push "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-BACKEND-$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
       #- name: Publish frontend
       #  run: |-
       #    docker push "gcr.io/$PROJECT_ID/$IMAGE:${GITHUB_REF#refs/heads/}-FRONTEND-$GITHUB_SHA"
