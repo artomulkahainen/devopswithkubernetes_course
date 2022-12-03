@@ -7,7 +7,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  IMAGE_BACKEND: dwk-env-backend
+  IMAGE_BACKEND: todo-backend
   SOPS_AGE_KEY: ${{ secrets.GKE_SOPS_KEY }}
 
 jobs:
