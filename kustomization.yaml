@@ -4,6 +4,8 @@ resources:
   - manifests/backend-deployment.yaml
   - manifests/backend-service.yaml
   - manifests/configmap.yaml
+  - manifests/ingress.yaml
+  - manifests/storageclass.yaml
   - manifests/persistent-claim.yaml
   - manifests/persistent-volume.yaml
   - manifests/postgres-service.yaml

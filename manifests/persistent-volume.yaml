@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: todo-pv
 spec:
-  storageClassName: manual
+  storageClassName: regionalStorage
   capacity:
     storage: 1Gi
   volumeMode: Filesystem
