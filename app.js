@@ -2,7 +2,6 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const { initDb } = require("./db.js");
-const { findAFile, getFile } = require("./imageUtil.js");
 const { Todo } = require("./models/Todo.js");
 
 const app = express();
@@ -12,13 +11,6 @@ app.use(express.json());
 app.use(cors());
 
 const apiPrefix = "/api";
-
-app.get(apiPrefix + "/image", async (req, res) => {
-  await findAFile();
-
-  res.set("Content-Type", "image/jpeg");
-  res.end(await getFile());
-});
 
 app.get(apiPrefix + "/todos", async (req, res) => {
   try {

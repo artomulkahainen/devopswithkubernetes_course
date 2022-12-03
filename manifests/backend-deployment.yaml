@@ -12,10 +12,6 @@ spec:
       labels:
         app: todo-backend
     spec:
-      volumes:
-        - name: shared-todo
-          persistentVolumeClaim:
-            claimName: todo-claim
       containers:
         - name: todo-backend
           image: BACKEND/IMAGE
