@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: todo-claim
 spec:
-  storageClassName: manual
+  storageClassName: "data"
   accessModes:
     - ReadWriteOnce
   resources:
